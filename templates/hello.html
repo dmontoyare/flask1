@@ -1,13 +1,32 @@
-{% if user_ip %}
+<!-- se importa macros -->
+{% import 'macros.html' as macros %}
 
+<!-- Se extiende la tamplate a heredar -->
+{% extends 'base.html' %}
 
-<h1>Hola, tu IP es {{ user_ip }}</h1>
-{% else %}
-    <a href="{{ url_for('index') }}">Ir a inicio</a>
-{% endif %}
+<!-- Es necesario utilizar los bloques para heredar otras
+plantillas en este caso se va a concatenar el titulo de la plantilla a heredar
+con el titulo de esta plantilla, por ende se utilia como una super clase  -->
+{% block title %}
+    {{ super() }}
+    Hello
+{% endblock %}
 
-<ul>
-    {% for todo in todos %}
-        <li>{{todo}}</li>
-    {% endfor %}
-</ul>
+<!-- De igual forma se adiciona un bloque que en el archivo base.html
+está anidado al body recordar que si no se utilizan estos bloques, la plantilal madre 
+no es capaz de tomar lo de la planlla hija -->
+
+{% block content %}
+    {% if user_ip %}
+        <h1>Hola, tu IP es {{ user_ip }}</h1>
+    {% else %}
+        <a href="{{ url_for('index') }}">Ir a inicio</a>
+    {% endif %}
+
+    <ul>
+        {% for todo in todos %}
+            <!-- la operacion del cliclo se le esta delegando a la macro -->
+            {{ macros.render_todo(todo) }}
+        {% endfor %}
+    </ul>
+{% endblock %}
