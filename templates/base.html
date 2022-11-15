@@ -6,11 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
         {% block title %}
-        Flask | 
+        Flask |  
         {% endblock %}
     </title>
 </head>
 <body>
+    <header>
+        {% include 'navbar.html' %}
+    </header>
     {% block content %}
     {% endblock %}
 </body>
