@@ -1,20 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- se extiende la aplicacion bootstrap.
+la extencion bootstrap ya treae por defecto ciertas cosas
+del html, por ende se borraron acá -->
+
+{% extends 'bootstrap/base.html' %}
+
+{% block head %}
+    {{ super() }}
+
     <title>
-        {% block title %}
-        Flask |  
-        {% endblock %}
+        {% block title %}Flask |{% endblock %}
     </title>
-</head>
-<body>
-    <header>
+{% endblock %}
+
+{% block body %}
+    {% block navbar %}
         {% include 'navbar.html' %}
-    </header>
+    {% endblock %}
+
     {% block content %}
     {% endblock %}
-</body>
-</html>
+{% endblock %}
